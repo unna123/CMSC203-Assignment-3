@@ -1,0 +1,63 @@
+/*
+ * Class: CMSC203 
+ * Instructor: Ashique , Tanveer
+ * Description: This program contains two different Ciphers that encrypts a message in two different and unique forms.
+ * Due: 03/25/25
+ * Platform/compiler: Eclipse
+ * I pledge that I have completed the programming 
+ * assignment independently. I have not copied the code 
+ * from a student or any source. I have not given my code 
+ * to any student.
+   Print your Name here: Unna Lat
+*/
+
+package package3;
+/* This main method calls on to the cryption manager
+ * takes the user input and send it there. Then 
+ * it delivers the output back.
+ */
+import java.util.Scanner;
+public class Main {
+	
+
+	    public static void main(String[] args) {
+	        Scanner scanner = new Scanner(System.in);
+	        
+	        // This is the user input for Caesar Cipher
+	        System.out.println("Caesar Cipher:");
+	        System.out.print("Enter a string to encrypt (uppercase only): ");
+	        String caesarPlainText = scanner.nextLine();
+	        System.out.print("Enter a key (integer): ");
+	        int caesarKey = scanner.nextInt();
+	        scanner.nextLine(); //reads the inputs
+
+	        if (CryptoManager.isStringInBounds(caesarPlainText)) {
+	            String caesarEncrypted = CryptoManager.caesarEncryption(caesarPlainText, caesarKey);
+	            System.out.println("Encrypted Text: " + caesarEncrypted);
+	            
+	            String caesarDecrypted = CryptoManager.caesarDecryption(caesarEncrypted, caesarKey);
+	            System.out.println("Decrypted Text: " + caesarDecrypted);
+	        } else {
+	            System.out.println("The selected string is not in bounds.");
+	        }
+
+	        // User input for Bellaso Cipher
+	        System.out.println("\nBellaso Cipher:");
+	        System.out.print("Enter a string to encrypt (uppercase only): ");
+	        String bellasoPlainText = scanner.nextLine();
+	        System.out.print("Enter a keyword for Bellaso Cipher: ");
+	        String bellasoKeyWord = scanner.nextLine();
+
+	        if (CryptoManager.isStringInBounds(bellasoPlainText)) {
+	            String bellasoEncrypted = CryptoManager.bellasoEncryption(bellasoPlainText, bellasoKeyWord);
+	            System.out.println("Encrypted Text: " + bellasoEncrypted);
+	            
+	            String bellasoDecrypted = CryptoManager.bellasoDecryption(bellasoEncrypted, bellasoKeyWord);
+	            System.out.println("Decrypted Text: " + bellasoDecrypted);
+	        } else {
+	            System.out.println("The selected string is not in bounds.");
+	        }
+//closes the scanner
+	        scanner.close();
+	    }
+	}
