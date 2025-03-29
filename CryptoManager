@@ -1,0 +1,69 @@
+package package3;
+/*This method manages all of the encryptions and decryption
+ * for both different ciphers.
+ */
+public class CryptoManager {
+	private static final int LOWER_RANGE = 32; 
+    private static final int UPPER_RANGE = 95; 
+    private static final int RANGE = UPPER_RANGE - LOWER_RANGE + 1;
+//this checks in the string is valid or not
+    public static boolean isStringInBounds(String plainText) {
+        for (char c : plainText.toCharArray()) {
+            if (c < LOWER_RANGE || c > UPPER_RANGE) {
+                return false;
+            }
+        }
+        return true;
+    }
+//this encrypts the inputted string into the ceaser method
+    public static String caesarEncryption(String plainText, int key) {
+        if (!isStringInBounds(plainText)) {
+            return "The selected string is not in bounds, Try again.";
+        }
+        StringBuilder encryptedText = new StringBuilder();
+        int effectiveKey = key % RANGE; 
+        for (char c : plainText.toCharArray()) {
+            char shiftedChar = (char) ((c + effectiveKey - LOWER_RANGE) % RANGE + LOWER_RANGE);
+            encryptedText.append(shiftedChar);
+        }
+        return encryptedText.toString();
+    }
+//this decrypts the string 
+    public static String caesarDecryption(String encryptedText, int key) {
+        StringBuilder decryptedText = new StringBuilder();
+        int effectiveKey = key % RANGE; 
+        for (char c : encryptedText.toCharArray()) {
+            char shiftedChar = (char) ((c - effectiveKey - LOWER_RANGE + RANGE) % RANGE + LOWER_RANGE);
+            decryptedText.append(shiftedChar);
+        }
+        return decryptedText.toString();
+    }
+//this encrypts the string into the bellaso method
+    public static String bellasoEncryption(String plainText, String bellasoStr) {
+        if (!isStringInBounds(plainText)) {
+            return "The selected string is not in bounds, Try again.";
+        }
+        StringBuilder encryptedText = new StringBuilder();
+        for (int i = 0; i < plainText.length(); i++) {
+            char c = plainText.charAt(i);
+            char keyChar = bellasoStr.charAt(i % bellasoStr.length());
+            char shiftedChar = (char) ((c + keyChar - LOWER_RANGE) % RANGE + LOWER_RANGE);
+            encryptedText.append(shiftedChar);
+        }
+        return encryptedText.toString();
+    }
+//this is the decryption
+    public static String bellasoDecryption(String encryptedText, String bellasoStr) {
+        StringBuilder decryptedText = new StringBuilder();
+        for (int i = 0; i < encryptedText.length(); i++) {
+            char c = encryptedText.charAt(i);
+            char keyChar = bellasoStr.charAt(i % bellasoStr.length());
+            char shiftedChar = (char) ((c - keyChar - LOWER_RANGE + RANGE) % RANGE + LOWER_RANGE);
+            decryptedText.append(shiftedChar);
+        }
+        return decryptedText.toString();
+    }
+}
+	
+
+
